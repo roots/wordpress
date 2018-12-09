@@ -33,6 +33,27 @@ function makeComposerPackage($version, $zipURL)
 {
   return [
     'name' => 'roots/wordpress',
+    'description' => 'WordPress is web software you can use to create a beautiful website or blog.',
+    'keywords' => [
+      'wordpress',
+      'blog',
+      'cms'
+    ],
+    'homepage' => 'http://wordpress.org/',
+    'license' => 'GPL-2.0-or-later',
+    'authors' => [
+      [
+        'name' => 'WordPress Community',
+        'homepage' => 'http://wordpress.org/about/'
+      ]
+    ],
+    'support' => [
+      'issues' => 'http://core.trac.wordpress.org/',
+      'forum' => 'http://wordpress.org/support/',
+      'wiki' => 'http://codex.wordpress.org/',
+      'irc' => 'irc://irc.freenode.net/wordpress',
+      'source' => 'http://core.trac.wordpress.org/browser'
+    ],
     'type' => 'wordpress-core',
     'version' => $version,
     'require' => [
