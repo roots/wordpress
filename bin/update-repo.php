@@ -91,7 +91,7 @@ function createGitBranchFromDir($dir, $version)
     }
     if (
       !run("git tag $safeVersion") ||
-      !run("git push remote $safeVersion")
+      !run("git push $remote $safeVersion")
     ) {
       throw new \RuntimeException("failed to tag $safeVersion");
     }
