@@ -1,0 +1,5 @@
+language: generic
+services: docker
+
+install: make init
+script: make update
