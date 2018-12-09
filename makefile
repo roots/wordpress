@@ -1,6 +1,6 @@
 .phony: update shell init
 
-DOCKER_ARGS = -v $(shell pwd):/app -e GITHUB_USER -e GITHUB_TOKEN roots/wordpress-self-update
+DOCKER_ARGS = -v $(shell pwd):/app -e GITHUB_USERNAME -e GITHUB_TOKEN roots/wordpress-self-update
 
 update:
 	docker run $(DOCKER_ARGS)
