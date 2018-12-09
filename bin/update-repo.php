@@ -41,6 +41,14 @@ function run($cmd) {
   return $code === 0;
 }
 
+function getGitRemote() {
+  $githubToken = getenv('GITHUB_TOKEN');
+  if (!isGithubToken($githubToken)) {
+    throw new \RuntimeException("refusing to proceed with possibly invalid GITHUB TOKEN $githubToken");
+  }
+  return "https://$githubToken@github.com/roots/wordpress.git";
+}
+
 function gitTagExists($tag)
 {
   if (!isVersion($tag)) {
@@ -51,29 +59,31 @@ function gitTagExists($tag)
   return run("git show-ref --tags --quiet --verify -- $ref");
 }
 
+function configureGitRepo() {
+  return (
+    run('git config user.name "Roots Ladybug"') &&
+    run('git config user.email "ben+ladybug@roots.io"')
+  );
+}
+
 function createGitBranchFromDir($dir, $version)
 {
   if (!isVersion($version)) {
     throw new \RuntimeException("refusing to pass '$version' to the shell");
   }
   $safeVersion = escapeshellarg($version);
-  $githubToken = getenv('GITHUB_TOKEN');
-  if (!isGithubToken($githubToken)) {
-    throw new \RuntimeException("refusing to proceed with possibly invalid GITHUB TOKEN $githubToken");
-  }
-  $remote = escapeshellarg("https://$githubToken@github.com/roots/wordpress.git");
+  $remote = escapeshellarg(getGitRemote());
   $branch = escapeshellarg("branch-$version");
   
   $prev = getcwd();
-  chdir($dir);
+  if (!chdir($dir)) {
+    throw new \RuntimeException("couldn't switch to $dir");
+  }
   try {
     if (!run('git init')) {
       throw new \RuntimeException("failed to git init in $dir");
     }
-    if (
-      !run('git config user.name "Roots Ladybug"') ||
-      !run('git config user.email "ben+ladybug@roots.io"')
-    ) {
+    if (!configureGitRepo()) {
       throw new \RuntimeException("could not set git info for $dir");
     }
     
@@ -102,19 +112,74 @@ function createGitBranchFromDir($dir, $version)
   return true;
 }
 
+function updateMasterBranch($dir, $version, $zipURL) {
+  $remote = escapeshellarg(getGitRemote());
+  $safeDir = escapeshellarg($dir);
+  
+  $prev = getcwd();
+  if (!run("git clone --single-branch -b master $remote $safeDir")) {
+    throw new \RuntimeException("failed to clone git repo in $dir");
+  }
+  if (!chdir($dir)) {
+    throw new \RuntimeException("couldn't switch to $dir");
+  }
+  try {
+    $built = buildBranch($version, $zipURL, $dir);
+    if (!$built) {
+      throw new \RuntimeException("failed to build out master branch with $version");
+    }
+    if (run('git diff-index --quiet HEAD')) {
+      echo "master is already up to date\n";
+      return true;
+    }
+    if (!configureGitRepo()) {
+      throw new \RuntimeException("could not set git info for $dir");
+    }
+    $commitMessage = escapeshellarg("updates to $version");
+    if (
+      !run('git add .') ||
+      !run("git commit -a -m $commitMessage")
+    ) {
+      throw new \RuntimeException("failed to commit $version to master");
+    }
+    if (!run("git push $remote master")) {
+      throw new \RuntimeException("failed to push $version to $remote");
+    }
+  } finally {
+    chdir($prev);
+  }
+  
+  return true;
+}
+
+function validateRelease($release) {
+  if (empty($release)) {
+    throw new \RuntimeException('bogus release');
+  }
+  $version = $release->name;
+  if (empty($version)) {
+    throw new \RuntimeException('encountered release with no name');
+  }
+  
+  if (!isVersion($version)) {
+    throw new \RuntimeException("tag '$version' does not look like a version number");
+  }
+  
+  if (!$release->zipball_url) {
+    throw new \RuntimeException("tag '$version' does does not have a zip url");
+  }
+  
+  return true;
+}
+
 function pushTags()
 {
   $stagingDir = tempdir();
-  foreach (getWPReleases() as $release) {
+  $releases = getWPReleases();
+  foreach ($releases as $release) {
     $version = $release->name;
     
-    if (empty($version)) {
-      throw new \RuntimeException('encountered release with no name');
-    }
-    
-    if (!isVersion($version)) {
-      throw new \RuntimeException("tag '$version' does not look like a version number");
-    }
+    validateRelease($release);
     
     if (gitTagExists($version)) {
       echo "already have a tag for '$version'\n";
@@ -133,7 +198,15 @@ function pushTags()
     if (!$pushed) {
       throw new \RuntimeException("failed to push $tagDir to remote");
     }
+    echo "pushed $version successfully\n";
   }
+  $latestRelease = $releases[0];
+  validateRelease($latestRelease);
+  
+  if (!updateMasterBranch("$stagingDir/master", $latestRelease->name, $latestRelease->zipball_url)) {
+    throw new \RuntimeException("failed to update master branch");
+  }
+  echo "updated master successfully\n";
   
   return true;
 }
@@ -150,6 +223,6 @@ if ($argv && $argv[0] && realpath($argv[0]) === __FILE__) {
   }
   
   $result = pushTags();
-  fwrite(STDERR, ($result ? 'success!' : 'failure'));
+  fwrite(STDERR, ($result ? 'success!' : 'failure') . "\n");
   exit($result ? 0 : 1);
 }
