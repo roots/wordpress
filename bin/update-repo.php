@@ -128,6 +128,9 @@ function updateMasterBranch($dir, $version, $zipURL) {
     if (!$built) {
       throw new \RuntimeException("failed to build out master branch with $version");
     }
+    if (!run('git add .')) {
+      throw new \RuntimeException("can't add anything to index");
+    }
     if (run('git diff-index --quiet HEAD')) {
       echo "master is already up to date\n";
       return true;
@@ -136,10 +139,7 @@ function updateMasterBranch($dir, $version, $zipURL) {
       throw new \RuntimeException("could not set git info for $dir");
     }
     $commitMessage = escapeshellarg("updates to $version");
-    if (
-      !run('git add .') ||
-      !run("git commit -a -m $commitMessage")
-    ) {
+    if (!run("git commit -a -m $commitMessage")) {
       throw new \RuntimeException("failed to commit $version to master");
     }
     if (!run("git push $remote master")) {
