@@ -65,7 +65,9 @@ function collectTags()
     ++$page;
   } while (count($pageResults) > 0);
   
-  return $tags;
+  return array_filter($tags, function ($tag) {
+    return version_compare($tag->name, '4.0', '>=');
+  });
 }
 
 function writeReleaseFile($tags)
