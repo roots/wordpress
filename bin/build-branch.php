@@ -58,7 +58,7 @@ function makeComposerPackage($version, $zipURL)
     'version' => $version,
     'require' => [
       'php' => '>=5.3.2',
-      'johnpbloch/wordpress-core-installer' => '^1.0'
+      'roots/wordpress-core-installer' => '>=1.0.0'
     ],
     'dist' => [
       'url' => $zipURL,
