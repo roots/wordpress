@@ -73,7 +73,7 @@ function createGitBranchFromDir($dir, $version)
   }
   $safeVersion = escapeshellarg($version);
   $remote = escapeshellarg(getGitRemote());
-  $branch = escapeshellarg("branch-$version");
+  $branch = escapeshellarg("$version-branch");
   
   $prev = getcwd();
   if (!chdir($dir)) {
