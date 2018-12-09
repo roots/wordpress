@@ -63,6 +63,11 @@ function makeComposerPackage($version, $zipURL)
     'dist' => [
       'url' => $zipURL,
       'type' => 'zip'
+    ],
+    'source' => [
+      'url' => 'https://github.com/WordPress/WordPress.git',
+      'type' => 'git',
+      'reference' => $version
     ]
   ];
 }
