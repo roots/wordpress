@@ -174,6 +174,9 @@ function validateRelease($release) {
 
 function pushTags()
 {
+  if (!run('git fetch --tags ' . escapeshellarg(getGitRemote()))) {
+    throw new \RuntimeException('could not fetch tags');
+  }
   $stagingDir = tempdir();
   $releases = getWPReleases();
   foreach ($releases as $release) {
