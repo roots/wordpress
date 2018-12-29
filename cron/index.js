@@ -1,8 +1,28 @@
 const fetch = require('node-fetch');
 const Parser = require('rss-parser');
+const { WebClient } = require('@slack/client');
 
 const FEED_URL = 'https://github.com/WordPress/WordPress/releases.atom';
 const TRAVIS_REPO = 'roots%2Fwordpress'
+
+async function notifySlack(tag) {
+  const token = process.env.SLACK_TOKEN;
+  const web = new WebClient(token);
+
+  try {
+    const response = await web.chat.postMessage({
+      channel: '#bedrock',
+      as_user: false,
+      username: 'Lambda',
+      icon_emoji: ':bedrock:',
+      text: `TravisCI build triggered for tag ${tag}`
+    });
+
+    console.log('Slack message sent', response.ts);
+  } catch(error) {
+    console.log(error);
+  }
+}
 
 async function triggerTravisBuild() {
   const body = {
@@ -51,8 +71,8 @@ exports.wordpressRelease = async (event, context) => {
   if (!release) {
     console.log(`Release for ${tag} does not in roots/wordpress`);
     triggerTravisBuild();
+    notifySlack(tag);
   } else {
     console.log(`Release for ${tag} already exists in roots/wordpress`);
   }
 }
-
