@@ -193,7 +193,7 @@ function pushTags()
     if (!mkdir($tagDir) && !is_dir($tagDir)) {
       throw new \RuntimeException(sprintf('Directory "%s" was not created', $tagDir));
     }
-    $built = buildBranch($version, $release->zipball_url, $tagDir);
+    $built = buildBranch($version, "https://wordpress.org/wordpress-{$version}.zip", $tagDir);
     if (!$built) {
       throw new \RuntimeException("failed to build out $version");
     }
@@ -206,7 +206,7 @@ function pushTags()
   $latestRelease = $releases[0];
   validateRelease($latestRelease);
   
-  if (!updateMasterBranch("$stagingDir/master", $latestRelease->name, $latestRelease->zipball_url)) {
+  if (!updateMasterBranch("$stagingDir/master", $latestRelease->name, "https://wordpress.org/wordpress-{$latestRelease->name}.zip")) {
     throw new \RuntimeException("failed to update master branch");
   }
   echo "updated master successfully\n";
