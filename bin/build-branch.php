@@ -39,20 +39,22 @@ function makeComposerPackage($version, $zipURL)
       'blog',
       'cms'
     ],
-    'homepage' => 'http://wordpress.org/',
+    'homepage' => 'https://wordpress.org/',
     'license' => 'GPL-2.0-or-later',
     'authors' => [
       [
         'name' => 'WordPress Community',
-        'homepage' => 'http://wordpress.org/about/'
+        'homepage' => 'https://wordpress.org/about/'
       ]
     ],
     'support' => [
-      'issues' => 'http://core.trac.wordpress.org/',
-      'forum' => 'http://wordpress.org/support/',
-      'wiki' => 'http://codex.wordpress.org/',
+      'issues' => 'https://core.trac.wordpress.org/',
+      'forum' => 'https://wordpress.org/support/',
+      'wiki' => 'https://codex.wordpress.org/',
       'irc' => 'irc://irc.freenode.net/wordpress',
-      'source' => 'http://core.trac.wordpress.org/browser'
+      'source' => 'https://core.trac.wordpress.org/browser',
+      'docs' => 'https://developer.wordpress.org/',
+      'rss' => 'https://wordpress.org/news/feed/'
     ],
     'type' => 'wordpress-core',
     'version' => $version,
