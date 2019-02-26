@@ -165,8 +165,17 @@ function validateRelease($release) {
     throw new \RuntimeException("tag '$version' does not look like a version number");
   }
   
-  if (!$release->zipball_url) {
-    throw new \RuntimeException("tag '$version' does does not have a zip url");
+  if (!$release->distball_url) {
+    throw new \RuntimeException("tag '$version' does does not have a dist url");
+  }
+
+  $ch = curl_init($release->distball_url);
+  curl_setopt($ch, CURLOPT_NOBODY, true);
+  curl_exec($ch);
+  $statusCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+  curl_close($ch);
+  if ($statusCode !== 200) {
+    throw new \RuntimeException("tag '$version' does does not have a reachable dist url");
   }
   
   return true;
@@ -193,7 +202,7 @@ function pushTags()
     if (!mkdir($tagDir) && !is_dir($tagDir)) {
       throw new \RuntimeException(sprintf('Directory "%s" was not created', $tagDir));
     }
-    $built = buildBranch($version, "https://wordpress.org/wordpress-{$version}.zip", $tagDir);
+    $built = buildBranch($version, $release->distball_url, $tagDir);
     if (!$built) {
       throw new \RuntimeException("failed to build out $version");
     }
@@ -206,7 +215,7 @@ function pushTags()
   $latestRelease = $releases[0];
   validateRelease($latestRelease);
   
-  if (!updateMasterBranch("$stagingDir/master", $latestRelease->name, "https://wordpress.org/wordpress-{$latestRelease->name}.zip")) {
+  if (!updateMasterBranch("$stagingDir/master", $latestRelease->name, $latestRelease->->distball_url)) {
     throw new \RuntimeException("failed to update master branch");
   }
   echo "updated master successfully\n";
