@@ -215,7 +215,7 @@ function pushTags()
   $latestRelease = $releases[0];
   validateRelease($latestRelease);
   
-  if (!updateMasterBranch("$stagingDir/master", $latestRelease->name, $latestRelease->->distball_url)) {
+  if (!updateMasterBranch("$stagingDir/master", $latestRelease->name, $latestRelease->distball_url)) {
     throw new \RuntimeException("failed to update master branch");
   }
   echo "updated master successfully\n";
