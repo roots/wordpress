@@ -65,9 +65,14 @@ function collectTags()
     ++$page;
   } while (count($pageResults) > 0);
   
-  return array_filter($tags, function ($tag) {
+  $tags = array_filter($tags, function ($tag) {
     return version_compare($tag->name, '4.0', '>=');
   });
+  
+  return array_map(function ($tag) {
+    $tag->distball_url = "https://wordpress.org/wordpress-{$tag->name}.zip";
+    return $tag;
+  }, $tags);
 }
 
 function writeReleaseFile($tags)
