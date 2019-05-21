@@ -59,7 +59,7 @@ function makeComposerPackage($version, $zipURL)
     'type' => 'wordpress-core',
     'version' => $version,
     'require' => [
-      'php' => '>=5.3.2',
+      'php' => '>=5.6.20',
       'roots/wordpress-core-installer' => '>=1.0.0'
     ],
     'dist' => [
