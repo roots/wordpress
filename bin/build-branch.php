@@ -29,8 +29,20 @@ SOFTWARE.
 EOT;
 }
 
+function minPhpVersionFor(string $version): string
+{
+    $minPhpVersion = '5.6.20';
+    if (version_compare($version, '5.2', '<')) {
+        $minPhpVersion = '5.2.4';
+    }
+
+    return $minPhpVersion;
+}
+
 function makeComposerPackage($version, $zipURL)
 {
+  $minPhpVersion = minPhpVersionFor($version);
+
   return [
     'name' => 'roots/wordpress',
     'description' => 'WordPress is web software you can use to create a beautiful website or blog.',
@@ -59,7 +71,7 @@ function makeComposerPackage($version, $zipURL)
     'type' => 'wordpress-core',
     'version' => $version,
     'require' => [
-      'php' => '>=5.3.2',
+      'php' => ">=${minPhpVersion}",
       'roots/wordpress-core-installer' => '>=1.0.0'
     ],
     'dist' => [
