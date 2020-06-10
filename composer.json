@@ -1,0 +1,41 @@
+{
+    "name": "roots/wordpress",
+    "description": "WordPress is web software you can use to create a beautiful website or blog.",
+    "keywords": [
+        "wordpress",
+        "blog",
+        "cms"
+    ],
+    "homepage": "https://wordpress.org/",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "WordPress Community",
+            "homepage": "https://wordpress.org/about/"
+        }
+    ],
+    "support": {
+        "issues": "https://core.trac.wordpress.org/",
+        "forum": "https://wordpress.org/support/",
+        "wiki": "https://codex.wordpress.org/",
+        "irc": "irc://irc.freenode.net/wordpress",
+        "source": "https://core.trac.wordpress.org/browser",
+        "docs": "https://developer.wordpress.org/",
+        "rss": "https://wordpress.org/news/feed/"
+    },
+    "type": "wordpress-core",
+    "version": "5.3.4",
+    "require": {
+        "php": ">=5.3.2",
+        "roots/wordpress-core-installer": ">=1.0.0"
+    },
+    "dist": {
+        "url": "https://api.github.com/repos/WordPress/WordPress/zipball/5.3.4",
+        "type": "zip"
+    },
+    "source": {
+        "url": "https://github.com/WordPress/WordPress.git",
+        "type": "git",
+        "reference": "5.3.4"
+    }
+}
