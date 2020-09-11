@@ -11,7 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "@slack/client": "^4.8.0",
-    "node-fetch": "^2.3.0",
+    "node-fetch": "^2.6.1",
     "semver": "^6.0.0"
   },
   "devDependencies": {
