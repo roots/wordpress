@@ -30,7 +30,7 @@
         "roots/wordpress-core-installer": ">=1.0.0"
     },
     "dist": {
-        "url": "https://api.github.com/repos/WordPress/WordPress/zipball/5.7",
+        "url": "https://api.github.com/repos/WordPress/WordPress/zipball/refs/tags/5.7",
         "type": "zip"
     },
     "source": {
