@@ -24,18 +24,18 @@
         "rss": "https://wordpress.org/news/feed/"
     },
     "type": "wordpress-core",
-    "version": "5.7.1",
+    "version": "5.7.2",
     "require": {
         "php": ">=5.3.2",
         "roots/wordpress-core-installer": ">=1.0.0"
     },
     "dist": {
-        "url": "https://api.github.com/repos/WordPress/WordPress/zipball/refs/tags/5.7.1",
+        "url": "https://api.github.com/repos/WordPress/WordPress/zipball/refs/tags/5.7.2",
         "type": "zip"
     },
     "source": {
         "url": "https://github.com/WordPress/WordPress.git",
         "type": "git",
-        "reference": "5.7.1"
+        "reference": "5.7.2"
     }
 }
