@@ -10,7 +10,7 @@ jobs:
     permissions:
       actions: write
       contents: write
-      repo: write
+      repos: write
 
     runs-on: ubuntu-latest
 
