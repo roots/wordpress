@@ -1,5 +1,5 @@
 {
-  "name": "roots/wordpress release checker",
+  "name": "roots-wordpress-package-release-checker",
   "version": "1.0.0",
   "description": "",
   "main": "src/index.js",
