@@ -7,11 +7,6 @@ on:
 
 jobs:
   update:
-    permissions:
-      actions: write
-      contents: write
-      repos: write
-
     runs-on: ubuntu-latest
 
     steps:
@@ -20,4 +15,5 @@ jobs:
       uses: docker://austinpray/roots-wordpress-updater
       env:
         GITHUB_USERNAME: "roots-ladybug"
+        GITHUB_ROOTS_BOT_ACCESS_TOKEN: ${{ secrets.ROOTS_BOT_ACCESS_TOKEN }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
