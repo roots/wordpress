@@ -6,7 +6,7 @@ const {
 } = require('./lib.js');
 
 
-module.exports.wordpressRelease = async (event, context) => {
+async function checkForNewRelease() {
   const tag = await getLatestReleaseInFeed();
   console.log(`Latest wordpress/wordpress release: ${tag}`);
   const existsInRepo = await releaseExistsInRepo(tag);
@@ -22,4 +22,6 @@ module.exports.wordpressRelease = async (event, context) => {
   } else {
     console.log(`Release for ${tag} already exists in roots/wordpress`);
   }
-};
+}
+
+checkForNewRelease();

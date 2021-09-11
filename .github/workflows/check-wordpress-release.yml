@@ -1,0 +1,32 @@
+name: Check for WordPress releases
+
+on:
+  schedule:
+    - cron:  '5 * * * *'
+
+defaults:
+  run:
+    working-directory: ./cron
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm ci
+    - name: Check for new WordPress release
+      run: npm start
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
+        TRAVIS_API_KEY: ${{ secrets.TRAVIS_API_KEY }}

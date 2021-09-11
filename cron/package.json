@@ -1,20 +1,17 @@
 {
-  "name": "bedrock-lambda",
+  "name": "roots/wordpress release checker",
   "version": "1.0.0",
   "description": "",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "package": "node-lambda package -A ../"
+    "start": "node src/index.js"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Roots",
+  "license": "MIT",
   "dependencies": {
     "@slack/client": "^4.8.0",
     "node-fetch": "^2.3.0",
     "semver": "^6.0.0"
-  },
-  "devDependencies": {
-    "node-lambda": "^0.13.0"
   }
 }
