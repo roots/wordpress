@@ -2,7 +2,7 @@ name: Check for WordPress releases
 
 on:
   schedule:
-    - cron:  '5 * * * *'
+    - cron:  '*/5 * * * *'
 
 defaults:
   run:
