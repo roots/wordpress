@@ -6,23 +6,20 @@ on:
 
 defaults:
   run:
-    working-directory: ./cron
+    working-directory: cron
 
 jobs:
   build:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [12.x]
 
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v2
       with:
-        node-version: ${{ matrix.node-version }}
+        node-version: '12'
         cache: 'npm'
+        cache-dependency-path: 'cron/package-lock.json'
     - run: npm ci
     - name: Check for new WordPress release
       run: npm start
