@@ -2,7 +2,7 @@ const {
   getLatestReleaseInFeed,
   releaseExistsInRepo,
   notifySlack,
-  triggerTravisBuild,
+  sendRepoDispatchEvent,
 } = require('./lib.js');
 
 
@@ -14,10 +14,10 @@ async function checkForNewRelease() {
   if (!existsInRepo) {
     console.log(`Release for ${tag} does not in roots/wordpress`);
     try {
-      await triggerTravisBuild();
-      notifySlack(`TravisCI build triggered for tag ${tag}`);
+      await sendRepoDispatchEvent(tag);
+      notifySlack(`Build triggered for tag ${tag}`);
     } catch (e) {
-      console.error('failed to trigger travis build');
+      console.error('failed to send repo dispatch event');
     }
   } else {
     console.log(`Release for ${tag} already exists in roots/wordpress`);

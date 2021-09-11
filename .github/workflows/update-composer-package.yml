@@ -2,6 +2,8 @@ name: Update roots/wordpress composer package
 
 on:
   workflow_dispatch:
+  repository_dispatch:
+    types: [wordpress-release]
 
 jobs:
   update:
