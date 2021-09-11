@@ -8,17 +8,21 @@ const last = function (arr) {
   return [].concat(arr).pop()
 };
 
-const TRAVIS_REPO = 'roots%2Fwordpress';
-
-async function github(endpoint) {
+async function github(endpoint, {method, body} = {method: 'GET'}) {
   const headers = new fetch.Headers();
   headers.append('User-Agent', 'roots-ladybug');
+  headers.append('Accept', 'application/vnd.github.v3+json');
   const token = process.env.GITHUB_TOKEN;
   if (token) {
     headers.append('Authorization', `token ${token}`)
   }
   const requestUrl = url.resolve('https://api.github.com', endpoint);
-  const response = await fetch(requestUrl, {headers});
+
+  if method === 'POST' {
+    const response = await fetch(requestUrl, {method, body, headers});
+  } else {
+    const response = await fetch(requestUrl, {method, headers});
+}
 
   if ([401, 403].includes(response.status)) {
     const remaining = response.headers.get('X-RateLimit-Remaining');
@@ -48,27 +52,17 @@ async function notifySlack(msg) {
   }
 }
 
-async function triggerTravisBuild() {
+async function sendRepoDispatchEvent(tag) {
   const body = {
-    request: { branch: "src" }
+    event_type: 'wordpress-release',
+    client_payload: { version: tag },
   };
 
-  const response = await fetch(`https://api.travis-ci.com/repo/${TRAVIS_REPO}/requests`, {
-    method: 'post',
-    body: JSON.stringify(body),
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      'Travis-API-Version': '3',
-      'Authorization': `token ${process.env.TRAVIS_API_KEY}`,
-    }
-  });
+  const response = await github('/repos/roots/wordpress/dispatches', {body: JSON.stringify(body), method: 'POST'});
 
   if (!response.ok) {
-    throw new Error('non-200 response from travis api');
+    throw new Error(`could not send dispatch event, status code ${response.status}`);
   }
-
-  console.log('Travis CI build triggered');
   return await response.json();
 }
 
@@ -112,5 +106,5 @@ module.exports = {
   getLatestReleaseInFeed,
   releaseExistsInRepo,
   notifySlack,
-  triggerTravisBuild,
+  sendRepoDispatchEvent,
 };
