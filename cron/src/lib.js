@@ -37,7 +37,7 @@ async function notifySlack(msg) {
     const response = await web.chat.postMessage({
       channel: '#bedrock',
       as_user: false,
-      username: 'Lambda',
+      username: 'GitHub',
       icon_emoji: ':bedrock:',
       text: msg,
     });
