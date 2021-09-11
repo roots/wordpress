@@ -10,7 +10,7 @@ defaults:
     working-directory: cron
 
 jobs:
-  build:
+  check:
     runs-on: ubuntu-latest
 
     steps:

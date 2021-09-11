@@ -1,0 +1,16 @@
+name: Update roots/wordpress composer package
+
+on:
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Create roots/wordpress release
+      uses: docker://austinpray/roots-wordpress-updater
+      env:
+        GITHUB_USERNAME: "roots-ladybug"
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
