@@ -11,10 +11,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Set env vars
-      run: |
-        echo "GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
-        echo "GITHUB_USERNAME=roots-ladybug" >> $GITHUB_ENV
     - name: Create roots/wordpress release
       uses: docker://austinpray/roots-wordpress-updater
       env:

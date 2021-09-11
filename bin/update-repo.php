@@ -32,7 +32,7 @@ function isVersion($string)
 }
 
 function isGithubToken($string) {
-  return preg_match('/^[a-z0-9]+$/i', $string);
+  return preg_match('/^[a-z0-9_]+$/i', $string);
 }
 
 function run($cmd) {
