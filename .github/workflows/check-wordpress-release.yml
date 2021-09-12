@@ -2,6 +2,8 @@ name: Check for WordPress releases
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron:  '*/5 * * * *'
 
 defaults:
   run:
@@ -25,4 +27,3 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
-        TRAVIS_API_KEY: ${{ secrets.TRAVIS_API_KEY }}

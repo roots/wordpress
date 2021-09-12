@@ -8,7 +8,7 @@ const last = function (arr) {
   return [].concat(arr).pop()
 };
 
-async function github(endpoint, {method, body} = {method: 'GET'}) {
+async function github(endpoint, options = {}) {
   const headers = new fetch.Headers();
   headers.append('User-Agent', 'roots-ladybug');
   headers.append('Accept', 'application/vnd.github.v3+json');
@@ -17,12 +17,7 @@ async function github(endpoint, {method, body} = {method: 'GET'}) {
     headers.append('Authorization', `token ${token}`)
   }
   const requestUrl = url.resolve('https://api.github.com', endpoint);
-
-  if method === 'POST' {
-    const response = await fetch(requestUrl, {method, body, headers});
-  } else {
-    const response = await fetch(requestUrl, {method, headers});
-}
+  const response = await fetch(requestUrl, {headers, ...options});
 
   if ([401, 403].includes(response.status)) {
     const remaining = response.headers.get('X-RateLimit-Remaining');
@@ -55,7 +50,7 @@ async function notifySlack(msg) {
 async function sendRepoDispatchEvent(tag) {
   const body = {
     event_type: 'wordpress-release',
-    client_payload: { version: tag },
+    client_payload: { version: tag }
   };
 
   const response = await github('/repos/roots/wordpress/dispatches', {body: JSON.stringify(body), method: 'POST'});
@@ -63,7 +58,6 @@ async function sendRepoDispatchEvent(tag) {
   if (!response.ok) {
     throw new Error(`could not send dispatch event, status code ${response.status}`);
   }
-  return await response.json();
 }
 
 async function getLatestReleaseInFeed() {
