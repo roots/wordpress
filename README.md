@@ -1,12 +1,12 @@
 <p align="center">
-  <a href="https://roots.io/sage/">
-    <img alt="Sage" src="https://cdn.roots.io/app/uploads/logo-sage.svg" height="100">
+  <a href="https://roots.io/">
+    <img alt="Sage" src="https://cdn.roots.io/app/uploads/logo-roots.svg" height="100">
   </a>
 </p>
 
 <p align="center">
   <a href="LICENSE.md">
-    <img alt="MIT License" src="https://img.shields.io/github/license/roots/sage?color=%23525ddc&style=flat-square" />
+    <img alt="MIT License" src="https://img.shields.io/github/license/roots/wordpress?color=%23525ddc&style=flat-square" />
   </a>
 
   <a href="https://packagist.org/packages/roots/wordpress">
@@ -44,7 +44,7 @@ However, the amount of effort needed to maintain and develop new features and pr
 
 ## About `roots/wordpress`
 
-`roots/wordpress` is a PHP package used by Composer to install WordPress core.
+`roots/wordpress` is an automatically updated Composer package for WordPress core.
 
 Read our [announcement post](https://roots.io/announcing-the-roots-wordpress-composer-package/) for
 more details on why this package is needed, and how it's built.
