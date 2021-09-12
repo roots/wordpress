@@ -16,7 +16,7 @@ function apiGET($url, $params = [])
   
   // Optional Authentication:
   $githubUsername = getenv('GITHUB_USERNAME');
-  $githubToken = getenv('GITHUB_TOKEN');
+  $githubToken = getenv('GITHUB_ROOTS_BOT_ACCESS_TOKEN');
   if ($githubUsername && $githubToken) {
     curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
     curl_setopt($curl, CURLOPT_USERPWD, "${githubUsername}:${githubToken}");

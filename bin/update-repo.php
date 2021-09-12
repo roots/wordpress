@@ -42,9 +42,9 @@ function run($cmd) {
 }
 
 function getGitRemote() {
-  $githubToken = getenv('GITHUB_TOKEN');
+  $githubToken = getenv('GITHUB_ROOTS_BOT_ACCESS_TOKEN');
   if (!isGithubToken($githubToken)) {
-    throw new \RuntimeException("refusing to proceed with possibly invalid GITHUB TOKEN $githubToken");
+    throw new \RuntimeException("refusing to proceed with possibly invalid GITHUB_ROOTS_BOT_ACCESS_TOKEN $githubToken");
   }
   return "https://$githubToken@github.com/roots/wordpress.git";
 }
