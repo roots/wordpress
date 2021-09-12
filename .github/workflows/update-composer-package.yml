@@ -4,6 +4,8 @@ on:
   workflow_dispatch:
   repository_dispatch:
     types: [wordpress-release]
+  schedule:
+    - cron:  '41 20 */1 * *'
 
 jobs:
   update:
