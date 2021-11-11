@@ -2,10 +2,8 @@ name: Update roots/wordpress composer package
 
 on:
   workflow_dispatch:
-  repository_dispatch:
-    types: [wordpress-release]
   schedule:
-    - cron:  '41 20 */1 * *'
+    - cron:  '*/10 * * * *'
 
 jobs:
   update:
