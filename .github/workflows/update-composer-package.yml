@@ -2,6 +2,8 @@ name: Update roots/wordpress composer package
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron:  '*/10 * * * *'
 
 jobs:
   update:
