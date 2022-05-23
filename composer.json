@@ -1,13 +1,7 @@
 {
     "name": "roots/wordpress",
-    "description": "WordPress is web software you can use to create a beautiful website or blog.",
-    "keywords": [
-        "wordpress",
-        "blog",
-        "cms"
-    ],
+    "description": "WordPress is open source software you can use to create a beautiful website, blog, or app.",
     "type": "metapackage",
-    "version": "5.9.3",
     "require": {
         "roots/wordpress-core-installer": "^1.0.0",
         "roots/wordpress-no-content": "self.version"
