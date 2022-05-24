@@ -2,6 +2,7 @@
     "name": "roots/wordpress",
     "description": "WordPress is open source software you can use to create a beautiful website, blog, or app.",
     "type": "metapackage",
+    "license": "MIT",
     "require": {
         "roots/wordpress-core-installer": "^1.0.0",
         "roots/wordpress-no-content": "self.version"
