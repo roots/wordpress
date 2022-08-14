@@ -10,19 +10,21 @@ jobs:
     name: Sync
     runs-on: ubuntu-latest
     outputs:
-      tags-matrix: steps.outputs.tags-matrix
-      latest-release: steps.outputs.latest-release
+      tags-matrix: steps.tags-matrix.outputs.tags-matrix
+      latest-release: steps.latest-release.outputs.latest-release
     steps:
       - name: Get upstream package name
         id: package
-        run: echo "::set-output name=upstream::$(jq -r '.require | map_values(select(. == "self.version")) | keys[]' composer.json)"
+        run: echo "::set-output name=package-name::$(jq -r '.require | map_values(select(. == "self.version")) | keys[]' composer.json)"
 
       - name: Generate diff of versions arrays
+        id: tags-matrix
         run: echo TODO
         # Read GitHub API on current & upstream tags and diff
         # Output: tags-matrix
 
       - name: Extract latest release
+        id: latest-release
         run: echo TODO
         # Semver compare to get the new latest
         # Or sort the array out and get the last value
