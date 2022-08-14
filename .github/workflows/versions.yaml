@@ -14,11 +14,16 @@ jobs:
       latest-release: steps.outputs.latest-release
     steps:
       - name: Get upstream package name
-        # Read package name in composer.json
+        id: package
+        run: echo "::set-output name=upstream::$(jq -r '.require | map_values(select(. == "self.version")) | keys[]' composer.json)"
+
       - name: Generate diff of versions arrays
+        run: echo TODO
         # Read GitHub API on current & upstream tags and diff
         # Output: tags-matrix
+
       - name: Extract latest release
+        run: echo TODO
         # Semver compare to get the new latest
         # Or sort the array out and get the last value
         # Output: latest-release
