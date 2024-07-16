@@ -21,7 +21,7 @@
 <p align="center">Composer package for installing WordPress</p>
 
 <p align="center">
-  <a href="https://roots.io/composer-wordpress-resources/">Introduction</a> &nbsp;&nbsp; <a href="https://packagist.org/packages/roots/wordpress">Packages</a> &nbsp;&nbsp; <a href="https://github.com/roots/acorn/releases">Releases</a> &nbsp;&nbsp; <a href="https://discourse.roots.io/">Community</a>
+  <a href="https://roots.io/composer-wordpress-resources/">Website</a> &nbsp;&nbsp; <a href="https://packagist.org/packages/roots/wordpress">Packages</a> &nbsp;&nbsp; <a href="https://github.com/roots/wordpress/releases">Releases</a> &nbsp;&nbsp; <a href="https://discourse.roots.io/">Community</a>
 </p>
 
 ## Sponsors
