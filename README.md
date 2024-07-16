@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://roots.io/">
-    <img alt="Sage" src="https://cdn.roots.io/app/uploads/logo-roots.svg" height="100">
+    <img alt="Roots" src="https://cdn.roots.io/app/uploads/logo-roots.svg" height="100">
   </a>
 </p>
 
