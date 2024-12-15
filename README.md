@@ -18,7 +18,7 @@
   </a>
 </p>
 
-<p align="center">Composer package for installing WordPress</p>
+<p align="center">Meta-package for installing WordPress via Composer</p>
 
 <p align="center">
   <a href="https://roots.io/composer-wordpress-resources/">Website</a> &nbsp;&nbsp; <a href="https://packagist.org/packages/roots/wordpress">Packages</a> &nbsp;&nbsp; <a href="https://github.com/roots/wordpress/releases">Releases</a> &nbsp;&nbsp; <a href="https://discourse.roots.io/">Community</a>
@@ -30,11 +30,30 @@ Roots is an open source project and completely free to use. If you've benefited 
 
 ## Overview
 
-`roots/wordpress` is an automatically updated Composer package for WordPress core.
+`roots/wordpress` is a meta-package that provides WordPress core installation via Composer. It's part of the Roots WordPress packaging ecosystem, which includes several packages to give you flexibility in how WordPress is installed:
+
+Package|Description|Content
+--|--|--
+[`roots/wordpress`](https://github.com/roots/wordpress)|Meta-package (this package)|Installs `roots/wordpress-no-content`
+[`roots/wordpress-full`](https://github.com/roots/wordpress-full)|Full WordPress build|✅ Core<br>✅ Official themes<br>✅ Akismet & Hello Dolly<br>✅ Beta & RC releases
+[`roots/wordpress-no-content`](https://github.com/roots/wordpress-no-content)|Minimal WordPress build|✅ Core only<br>❌ No themes or plugins<br>❌ No beta releases
+[`roots/wordpress-packager`](https://github.com/roots/wordpress-packager)|Build tooling|Creates the package releases
+
+## Requirements
+
+A [WordPress Core Installer](https://packagist.org/?query=wordpress%20core%20installer&type=composer-plugin) package is required to handle installation path.
+
+> [!tip]
+> Roots project provides a core installer, `roots/wordpress-core-installer`.  
+> See the [usage docs](https://github.com/roots/wordpress-core-installer#readme).
 
 ## Getting Started
 
-See the [Composer with WordPress Resources introduction](https://roots.io/composer-wordpress-resources/).
+```console
+composer require roots/wordpress
+```
+
+For more detailed information and examples, see the [Composer with WordPress Resources introduction](https://roots.io/composer-wordpress-resources/).
 
 ## Stay Connected
 
