@@ -50,7 +50,7 @@ For more detailed information and examples, see the [Composer with WordPress Res
 
 > [!tip]
 > Looking for WordPress plugins and themes as Composer packages?
-> [WP Composer](https://wp-composer.com/) provides all WordPress.org plugins and themes as a Composer repository.
+> [WP Packages](https://wp-packages.org/) provides all WordPress.org plugins and themes as a Composer repository.
 
 ## Community
 
