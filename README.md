@@ -30,9 +30,7 @@ Roots is an independent open source org, supported only by developers like you. 
 
 ## Requirements
 
-A [WordPress Core Installer](https://packagist.org/packages/roots/wordpress-core-installer) package is required to handle installation path.
-
-See the [`roots/worpress-core-installer` usage docs](https://github.com/roots/wordpress-core-installer#readme).
+The [`roots/wordpress-core-installer`](https://github.com/roots/wordpress-core-installer) package is required to handle the installation path.
 
 ## Getting Started
 
@@ -40,7 +38,7 @@ See the [`roots/worpress-core-installer` usage docs](https://github.com/roots/wo
 composer require roots/wordpress
 ```
 
-For more detailed information and examples, see the [WordPress via Composer](https://wp-packages.org/roots-wordpress).
+For more detailed information and examples, see [WordPress via Composer](https://wp-packages.org/roots-wordpress).
 
 > [!tip]
 > Looking for WordPress plugins and themes as Composer packages?
