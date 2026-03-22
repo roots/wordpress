@@ -13,7 +13,7 @@
         "GPL-2.0-or-later"
     ],
     "require": {
-        "roots/wordpress-core-installer": "^3.0",
+        "roots/wordpress-core-installer": "^4.0",
         "roots/wordpress-no-content": "self.version"
     }
 }
